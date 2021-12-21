@@ -12,7 +12,7 @@ export const config = () => ({
     database: process.env.DATABASE_NAME,
     entities: [Customer],
     synchronize: true, //true,
-    //ssl: { rejectUnauthorized: false }
+    ssl: { rejectUnauthorized: false }
   },
   access_token: {
     secret: process.env.ACCESS_JWT_SECRET,
