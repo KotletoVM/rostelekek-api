@@ -1,11 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import * as bcrypt from 'bcrypt';
+import { CreateCustomerDto } from '../customer/dto/create-customer.dto';
+import { CreateWorkerDto } from '../worker/dto/create-worker.dto';
+import { CustomerService } from '../customer/customer.service';
+import { WorkerService } from '../worker/worker.service';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
+  constructor(private workerService: WorkerService,
+              private customerService: CustomerService) {
+  }
+  create(createCustomerDto: CreateCustomerDto) {
     return 'This action adds a new auth';
+  }
+
+  async createWorker(createWorkerDto: CreateWorkerDto){
+    createWorkerDto.password = await this.generateHash(createWorkerDto.password)
+    const {password, ...worker} = await this.workerService.create(createWorkerDto)
+    return worker
+  }
+
+  generateHash(password: string){
+    return bcrypt.hash(password, 10);
   }
 
   findAll() {
@@ -16,9 +32,9 @@ export class AuthService {
     return `This action returns a #${id} auth`;
   }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
+  /*update(id: number, updateAuthDto: UpdateAuthDto) {
     return `This action updates a #${id} auth`;
-  }
+  }*/
 
   remove(id: number) {
     return `This action removes a #${id} auth`;

@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { WorkActService } from './work-act.service';
 import { CreateWorkActDto } from './dto/create-work-act.dto';
 import { UpdateWorkActDto } from './dto/update-work-act.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('WorkAct')
 @Controller('work-act')
 export class WorkActController {
   constructor(private readonly workActService: WorkActService) {}

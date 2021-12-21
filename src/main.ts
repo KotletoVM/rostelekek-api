@@ -11,11 +11,15 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   //const configService: ConfigService = app.get(ConfigService);
   const config = new DocumentBuilder()
-    .setTitle('ARTART')
-    .setDescription('ARTART API description')
+    .setTitle('RosteleKEK-API')
+    .setDescription('Ком или кек? конечно кек.')
     .setVersion('1.0')
-    .addTag('auth', 'операции, связанные с аутентификацией')
-    .addTag('customer', 'операции, связанные с пользователями')
+    .addTag('Auth', 'операции, связанные с аутентификацией')
+    .addTag('Customer', 'операции, связанные с пользователями')
+    .addTag('Worker', 'операции, связанные с сотрудниками')
+    .addTag('WorkAct', 'операции, связанные с чемттохз чем')
+    .addTag('Order', 'операции, связанные с заказами')
+    .addTag('Service', 'операции, связанные с услугами')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
