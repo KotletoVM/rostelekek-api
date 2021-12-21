@@ -26,7 +26,7 @@ export class CreateCustomerDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(6)
+  @MinLength(6, {message: "Пароль должен быть не менее 6 символов"})
   @Matches(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/,
     { message: 'Пароль должен содержать буквы и цифры\n' })
   password: string;

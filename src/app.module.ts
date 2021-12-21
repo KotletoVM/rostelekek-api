@@ -7,6 +7,10 @@ import {DatabaseConfig} from './config/database.config'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomerModule } from './customer/customer.module';
 import { AuthModule } from './auth/auth.module';
+import { OrderModule } from './order/order.module';
+import { ServiceModule } from './service/service.module';
+import { WorkerModule } from './worker/worker.module';
+import { WorkActModule } from './work-act/work-act.module';
 
 
 @Module({
@@ -18,7 +22,11 @@ import { AuthModule } from './auth/auth.module';
     useClass: DatabaseConfig,
   }),
     CustomerModule,
-    AuthModule],
+    AuthModule,
+    OrderModule,
+    ServiceModule,
+    WorkerModule,
+    WorkActModule],
   controllers: [AppController],
   providers: [AppService],
 })
