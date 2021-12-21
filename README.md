@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://rostelekek.herokuapp.com/api" target="blank"><img src="https://www.meme-arsenal.com/memes/e981f11392c4ea64739620c0e27ff4f9.jpg" width="320" alt="Кщыеудулул Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
