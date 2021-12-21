@@ -1,5 +1,7 @@
 //import { User } from "src/user/entities/user.entity";
 
+import { Customer } from '../customer/entities/customer.entity';
+
 export const config = () => ({
   database: {
     type: process.env.DATABASE_TYPE,
@@ -8,7 +10,7 @@ export const config = () => ({
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
-    entities: [],
+    entities: [Customer],
     synchronize: true, //true,
     //ssl: { rejectUnauthorized: false }
   },

@@ -15,7 +15,7 @@ async function bootstrap() {
     .setDescription('ARTART API description')
     .setVersion('1.0')
     .addTag('auth', 'операции, связанные с аутентификацией')
-    .addTag('user', 'операции, связанные с пользователями')
+    .addTag('customer', 'операции, связанные с пользователями')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
