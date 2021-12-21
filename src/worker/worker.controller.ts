@@ -13,7 +13,7 @@ export class WorkerController {
   create(@Body() createWorkerDto: CreateWorkerDto) {
     return this.workerService.create(createWorkerDto);
   }*/
-
+  
   @Get()
   async findAll() {
     const workers = await this.workerService.findAll();

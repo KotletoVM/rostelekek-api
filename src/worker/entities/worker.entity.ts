@@ -5,7 +5,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 export class Worker {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column({unique: true})
   login: string;
   @Column()
   password: string;

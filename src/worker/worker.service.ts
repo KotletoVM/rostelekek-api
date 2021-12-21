@@ -16,7 +16,8 @@ export class WorkerService {
   }
 
   findAll() {
-    return this.workerRepository.find()
+    const qb = this.workerRepository.createQueryBuilder('worker')
+    return qb.select(['worker.id', 'worker.name', 'worker.experience', 'worker.position']).getMany()
   }
 
   findOne(id: number) {

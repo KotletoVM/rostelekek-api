@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 export class Service {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column({unique: true})
   name: string;
   @Column({nullable: true})
   internet: string;
