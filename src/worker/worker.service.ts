@@ -25,10 +25,10 @@ export class WorkerService {
   }
 
   update(id: number, updateWorkerDto: UpdateWorkerDto) {
-    return `This action updates a #${id} worker`;
+    return this.workerRepository.update(id, updateWorkerDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} worker`;
+    return this.workerRepository.delete(id)
   }
 }

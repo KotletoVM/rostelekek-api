@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { CreateCustomerDto } from '../customer/dto/create-customer.dto';
 import { CreateWorkerDto } from '../worker/dto/create-worker.dto';
 import { CustomerService } from '../customer/customer.service';

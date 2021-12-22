@@ -5,6 +5,7 @@ import { Order } from "../order/entities/order.entity";
 import { Service } from "../service/entities/service.entity";
 import { WorkAct } from "../work-act/entities/work-act.entity";
 import { Worker } from "../worker/entities/worker.entity"
+import { Equipment } from "../equipment/entities/equipment.entity";
 export const config = () => ({
   database: {
     type: process.env.DATABASE_TYPE,
@@ -13,7 +14,7 @@ export const config = () => ({
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
-    entities: [Customer, Order, Service, Worker, WorkAct],
+    entities: [Customer, Order, Service, Worker, WorkAct, Equipment],
     synchronize: true, //true,
     ssl: { rejectUnauthorized: false }
   },

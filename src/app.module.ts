@@ -11,6 +11,7 @@ import { OrderModule } from './order/order.module';
 import { ServiceModule } from './service/service.module';
 import { WorkerModule } from './worker/worker.module';
 import { WorkActModule } from './work-act/work-act.module';
+import { EquipmentModule } from './equipment/equipment.module';
 
 
 @Module({
@@ -26,7 +27,8 @@ import { WorkActModule } from './work-act/work-act.module';
     OrderModule,
     ServiceModule,
     WorkerModule,
-    WorkActModule],
+    WorkActModule,
+    EquipmentModule],
   controllers: [AppController],
   providers: [AppService],
 })
