@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Order')
 @Controller('order')
@@ -14,6 +14,10 @@ export class OrderController {
     return this.orderService.create(createOrderDto);
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateOrderDto
+  })
   @Get()
   async findAll() {
     const order = await this.orderService.findAll();
@@ -21,6 +25,10 @@ export class OrderController {
     return order
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateOrderDto
+  })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     const order = await this.orderService.findOne(+id);

@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Res } from '@nestjs/common';
 import { WorkerService } from './worker.service';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @ApiTags('Worker')
 @Controller('worker')
@@ -14,14 +15,9 @@ export class WorkerController {
     return this.workerService.create(createWorkerDto);
   }*/
 
-  @ApiOperation({description: "Финд ол как финд ол чо бубнить то..."})
-  @ApiResponse({
-    status: 200,
-    description: 'Работники найдены'
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Ни одного сотрудника нет'
+  @ApiOkResponse({
+    description: "Запрос удался",
+    type: CreateWorkerDto
   })
   @Get()
   async findAll() {
@@ -30,6 +26,10 @@ export class WorkerController {
     return workers
   }
 
+  @ApiOkResponse({
+    description: "Запрос удался",
+    type: CreateWorkerDto
+  })
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const worker = await this.workerService.findOne(+id)

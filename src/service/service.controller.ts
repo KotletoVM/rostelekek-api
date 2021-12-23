@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { ServiceService } from './service.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Service')
 @Controller('service')
@@ -14,6 +14,10 @@ export class ServiceController {
     return this.serviceService.create(createServiceDto);
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateServiceDto
+  })
   @Get()
   async findAll() {
     const service = await this.serviceService.findAll()
@@ -21,6 +25,10 @@ export class ServiceController {
     return service
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateServiceDto
+  })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     const service = await this.serviceService.findOne(+id);

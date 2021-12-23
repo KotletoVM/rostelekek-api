@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { EquipmentService } from './equipment.service';
 import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { UpdateEquipmentDto } from './dto/update-equipment.dto';
+import { ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('equipment')
 export class EquipmentController {
@@ -12,6 +13,10 @@ export class EquipmentController {
     return this.equipmentService.create(createEquipmentDto);
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateEquipmentDto
+  })
   @Get()
   async findAll() {
     const equip = await this.equipmentService.findAll();
@@ -19,6 +24,10 @@ export class EquipmentController {
     return equip
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateEquipmentDto
+  })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     const equip = await this.equipmentService.findOne(+id);

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { WorkActService } from './work-act.service';
 import { CreateWorkActDto } from './dto/create-work-act.dto';
 import { UpdateWorkActDto } from './dto/update-work-act.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('WorkAct')
 @Controller('work-act')
@@ -14,12 +14,20 @@ export class WorkActController {
     return this.workActService.create(createWorkActDto);
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateWorkActDto
+  })
   @Get()
   async findAll() {
     const workAct = await this.workActService.findAll();
     if (workAct.length == 0) throw new NotFoundException('Чото не найдено ничо)')
   }
 
+  @ApiOkResponse({
+    description: 'Запрос удался',
+    type: CreateWorkActDto
+  })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     const workAct = await this.workActService.findOne(+id);

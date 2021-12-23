@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Customer')
 @Controller('customer')
@@ -13,12 +13,19 @@ export class CustomerController {
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customerService.create(createCustomerDto);
   }*/
-
+  @ApiOkResponse({
+    description: "Запрос удался",
+    type: CreateCustomerDto
+  })
   @Get()
   findAll() {
     return this.customerService.findAll();
   }
 
+  @ApiOkResponse({
+    description: "Запрос удался",
+    type: CreateCustomerDto
+  })
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const find = await this.customerService.findOne(+id);
