@@ -1,7 +1,4 @@
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm'
-import { Exclude } from 'class-transformer'
-
-
 
 @Entity()
 export class Customer {
@@ -11,8 +8,6 @@ export class Customer {
   name: string;
   @Column({unique: true})
   email: string;
-  //@Column({nullable: true})
-  //password: string;
   @Column()
   password: string;
   @Column({unique: true})
@@ -30,5 +25,5 @@ export class Customer {
   @Column({default: 'https://storage.yandexcloud.net/rostelecom/userpic/userpic.png'})
   userpic: string;
   @Column({ default: false })
-  public isEmailConfirmed: boolean;
+  isEmailConfirmed: boolean;
 }

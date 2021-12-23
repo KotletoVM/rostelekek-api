@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Customer } from './entities/customer.entity';
+import { Repository } from 'typeorm';
+import { CreateCustomerDto } from './dto/create-customer.dto';
 
 @Injectable()
 export class CustomerService {
   constructor(
     @InjectRepository(Customer)
-    private customerRepository: Repository<Customer>
-  ) {}
+    private customerRepository: Repository<Customer>) {}
+
   create(createCustomerDto: CreateCustomerDto) {
-    const qb = this.customerRepository.createQueryBuilder('customer')
-    qb.insert()
+    return this.customerRepository.save(createCustomerDto)
   }
 
   findAll() {
@@ -29,10 +28,10 @@ export class CustomerService {
   }
 
   update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+    return this.customerRepository.update(id, updateCustomerDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} customer`;
+    return this.customerRepository.delete(id)
   }
 }

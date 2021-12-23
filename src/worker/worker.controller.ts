@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { WorkerService } from './worker.service';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Worker')
 @Controller('worker')
@@ -13,7 +13,16 @@ export class WorkerController {
   create(@Body() createWorkerDto: CreateWorkerDto) {
     return this.workerService.create(createWorkerDto);
   }*/
-  
+
+  @ApiOperation({description: "Финд ол как финд ол чо бубнить то..."})
+  @ApiResponse({
+    status: 200,
+    description: 'Работники найдены'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Ни одного сотрудника нет'
+  })
   @Get()
   async findAll() {
     const workers = await this.workerService.findAll();
@@ -29,12 +38,16 @@ export class WorkerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkerDto: UpdateWorkerDto) {
+  async update(@Param('id') id: string, @Body() updateWorkerDto: UpdateWorkerDto) {
+    const worker = await this.workerService.findOne(+id)
+    if (!worker) throw new NotFoundException('Сотрудник не найден')
     return this.workerService.update(+id, updateWorkerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
+    const worker = await this.workerService.findOne(+id)
+    if (!worker) throw new NotFoundException('Сотрудник не найден')
     return this.workerService.remove(+id);
   }
 }

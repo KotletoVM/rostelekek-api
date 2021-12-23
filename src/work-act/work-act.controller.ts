@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { WorkActService } from './work-act.service';
 import { CreateWorkActDto } from './dto/create-work-act.dto';
 import { UpdateWorkActDto } from './dto/update-work-act.dto';
@@ -15,22 +15,29 @@ export class WorkActController {
   }
 
   @Get()
-  findAll() {
-    return this.workActService.findAll();
+  async findAll() {
+    const workAct = await this.workActService.findAll();
+    if (workAct.length == 0) throw new NotFoundException('Чото не найдено ничо)')
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workActService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    const workAct = await this.workActService.findOne(+id);
+    if (!workAct) throw new NotFoundException(`Чото с номером ${id} не найден`)
+    return workAct
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkActDto: UpdateWorkActDto) {
+  async update(@Param('id') id: number, @Body() updateWorkActDto: UpdateWorkActDto) {
+    const workAct = await this.workActService.findOne(+id);
+    if (!workAct) throw new NotFoundException(`Чото с номером ${id} не найден`)
     return this.workActService.update(+id, updateWorkActDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
+    const workAct = await this.workActService.findOne(+id);
+    if (!workAct) throw new NotFoundException(`Чото с номером ${id} не найден`)
     return this.workActService.remove(+id);
   }
 }

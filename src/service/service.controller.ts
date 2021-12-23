@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { ServiceService } from './service.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
@@ -15,22 +15,30 @@ export class ServiceController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceService.findAll();
+  async findAll() {
+    const service = await this.serviceService.findAll()
+    if (service.length == 0) throw new NotFoundException('Услуги не найдены')
+    return service
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
+    const service = await this.serviceService.findOne(+id);
+    if (!service) throw new NotFoundException(`Сервис с номером ${id} не найден`)
     return this.serviceService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
+  async update(@Param('id') id: number, @Body() updateServiceDto: UpdateServiceDto) {
+    const service = await this.serviceService.findOne(+id);
+    if (!service) throw new NotFoundException(`Сервис с номером ${id} не найден`)
     return this.serviceService.update(+id, updateServiceDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
+    const service = await this.serviceService.findOne(+id);
+    if (!service) throw new NotFoundException(`Сервис с номером ${id} не найден`)
     return this.serviceService.remove(+id);
   }
 }

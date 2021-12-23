@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -15,22 +15,29 @@ export class OrderController {
   }
 
   @Get()
-  findAll() {
-    return this.orderService.findAll();
+  async findAll() {
+    const order = await this.orderService.findAll();
+    if (order.length == 0) throw new NotFoundException('Заказы не найдены')
+    return order
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.orderService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    const order = await this.orderService.findOne(+id);
+    if (!order) throw new NotFoundException(`Заказ с номером ${id} не найден`)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
+  async update(@Param('id') id: number, @Body() updateOrderDto: UpdateOrderDto) {
+    const order = await this.orderService.findOne(+id);
+    if (!order) throw new NotFoundException(`Заказ с номером ${id} не найден`)
     return this.orderService.update(+id, updateOrderDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
+    const order = await this.orderService.findOne(+id);
+    if (!order) throw new NotFoundException(`Заказ с номером ${id} не найден`)
     return this.orderService.remove(+id);
   }
 }

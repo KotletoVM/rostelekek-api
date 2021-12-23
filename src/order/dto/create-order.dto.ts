@@ -1,15 +1,8 @@
 import {
-  IsEmail,
-  IsString,
   IsNotEmpty,
-  Matches,
-  IsOptional,
-  IsUrl,
   IsEmpty,
-  MinLength,
-  Length,
-  IsInt, IsDate
-} from "class-validator";
+  IsInt, IsDate, IsNumber,
+} from 'class-validator';
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateOrderDto {
@@ -27,4 +20,12 @@ export class CreateOrderDto {
   @IsNotEmpty()
   @IsInt()
   id_service: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
+  id_equip: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  end_price: number;
 }

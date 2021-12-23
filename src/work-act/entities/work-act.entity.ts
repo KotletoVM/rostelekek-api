@@ -16,7 +16,5 @@ export class WorkAct {
   @Column({nullable: true, type: "timestamp"})
   finish_date: Date;
   @Column({nullable: true})
-  equipment: string;
-  @Column({nullable: true})
   state: string;
 }

@@ -2,18 +2,28 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AuthService } from './auth.service';
 import { CreateCustomerDto } from '../customer/dto/create-customer.dto';
 import { CreateWorkerDto } from '../worker/dto/create-worker.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiOperation({description: "Это для регистрации кустомеров)"})
+  @ApiResponse({
+    status: 201,
+    description: 'Пользователь добавлен'
+  })
   @Post('register')
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.authService.create(createCustomerDto);
   }
 
+  @ApiOperation({description: "Это для регистрации работников)"})
+  @ApiResponse({
+    status: 201,
+    description: 'Работник добавлен'
+  })
   @Post('register-worker')
   createWorker(@Body() createWorkerDto: CreateWorkerDto) {
     return this.authService.createWorker(createWorkerDto);
