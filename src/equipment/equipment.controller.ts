@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { EquipmentService } from './equipment.service';
 import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { UpdateEquipmentDto } from './dto/update-equipment.dto';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Equipment')
 @Controller('equipment')
 export class EquipmentController {
   constructor(private readonly equipmentService: EquipmentService) {}
@@ -15,7 +16,8 @@ export class EquipmentController {
 
   @ApiOkResponse({
     description: 'Запрос удался',
-    type: CreateEquipmentDto
+    type: CreateEquipmentDto,
+    isArray: true
   })
   @Get()
   async findAll() {

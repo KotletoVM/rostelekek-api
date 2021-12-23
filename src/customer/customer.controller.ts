@@ -15,7 +15,8 @@ export class CustomerController {
   }*/
   @ApiOkResponse({
     description: "Запрос удался",
-    type: CreateCustomerDto
+    type: CreateCustomerDto,
+    isArray: true
   })
   @Get()
   findAll() {

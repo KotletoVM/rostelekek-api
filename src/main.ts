@@ -20,6 +20,7 @@ async function bootstrap() {
     .addTag('WorkAct', 'операции, связанные с чемттохз чем')
     .addTag('Order', 'операции, связанные с заказами')
     .addTag('Service', 'операции, связанные с услугами')
+    .addTag('Equipment', 'операции, связанные с оборудованием')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

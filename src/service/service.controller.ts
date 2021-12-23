@@ -16,7 +16,8 @@ export class ServiceController {
 
   @ApiOkResponse({
     description: 'Запрос удался',
-    type: CreateServiceDto
+    type: CreateServiceDto,
+    isArray: true
   })
   @Get()
   async findAll() {

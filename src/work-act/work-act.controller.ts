@@ -16,7 +16,8 @@ export class WorkActController {
 
   @ApiOkResponse({
     description: 'Запрос удался',
-    type: CreateWorkActDto
+    type: CreateWorkActDto,
+    isArray: true
   })
   @Get()
   async findAll() {

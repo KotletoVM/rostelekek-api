@@ -16,7 +16,8 @@ export class OrderController {
 
   @ApiOkResponse({
     description: 'Запрос удался',
-    type: CreateOrderDto
+    type: CreateOrderDto,
+    isArray: true
   })
   @Get()
   async findAll() {

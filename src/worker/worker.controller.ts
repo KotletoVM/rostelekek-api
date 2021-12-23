@@ -17,7 +17,8 @@ export class WorkerController {
 
   @ApiOkResponse({
     description: "Запрос удался",
-    type: CreateWorkerDto
+    type: CreateWorkerDto,
+    isArray: true
   })
   @Get()
   async findAll() {
