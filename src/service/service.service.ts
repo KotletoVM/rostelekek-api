@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Service } from './entities/service.entity';
 import { Repository } from 'typeorm';
 import { CategoryDto } from "./dto/category.dto";
+import { category } from "../enums/category.enum";
 
 @Injectable()
 export class ServiceService {
@@ -25,9 +26,9 @@ export class ServiceService {
     return this.serviceRepository.findOne(id)
   }
 
-  async findByCategory(cat: CategoryDto){
+  findByCategory(category: CategoryDto){
     const qb = this.serviceRepository.createQueryBuilder('service')
-    qb.select('service').where('service.category == :cat', {cat: cat})
+    return qb.select('service').where('service.category = :cat', {cat: category}).getMany()
   }
 
   update(id: number, updateServiceDto: UpdateServiceDto) {

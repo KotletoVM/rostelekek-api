@@ -1,8 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Query } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  NotFoundException,
+  Query,
+  UsePipes,
+  ValidationPipe
+} from "@nestjs/common";
 import { ServiceService } from './service.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CategoryDto } from "./dto/category.dto";
 
 @ApiTags('Service')
 @Controller('service')
@@ -20,8 +33,9 @@ export class ServiceController {
     isArray: true
   })
   @Get()
-  async findAll(@Query('cat') cat?: string) {
-      const service = await this.serviceService.findAll()
+  @UsePipes(new ValidationPipe({transform: true}))
+  async findAll(@Query('category') category?: CategoryDto) {
+    const service = await this.serviceService.findByCategory(category)
       if (service.length == 0) throw new NotFoundException('Услуги не найдены')
       return service
   }
