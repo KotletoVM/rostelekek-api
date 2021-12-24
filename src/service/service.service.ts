@@ -26,7 +26,7 @@ export class ServiceService {
     return this.serviceRepository.findOne(id)
   }
 
-  findByCategory(category: CategoryDto){
+  findByCategory(category: string){
     const qb = this.serviceRepository.createQueryBuilder('service')
     return qb.select('service').where('service.category = :cat', {cat: category}).getMany()
   }

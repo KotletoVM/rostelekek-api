@@ -17,7 +17,6 @@ export class WorkerController {
 
   @ApiOkResponse({
     description: "Запрос удался",
-    content: {'text/plain': {}},
     type: CreateWorkerDto,
     isArray: true
   })

@@ -33,9 +33,9 @@ export class ServiceController {
     isArray: true
   })
   @Get()
-  @UsePipes(new ValidationPipe({transform: true}))
-  async findAll(@Query('category') category?: CategoryDto) {
-    const service = await this.serviceService.findByCategory(category)
+  //@UsePipes(new ValidationPipe({transform: true}))
+  async findAll(@Query() queryParams?: CategoryDto) {
+    const service = await this.serviceService.findByCategory(queryParams.category)
       if (service.length == 0) throw new NotFoundException('Услуги не найдены')
       return service
   }

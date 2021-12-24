@@ -1,5 +1,5 @@
 export enum position{
-  ADMIN = 'admin',
-  MANAGER = 'manager',
-  EXECUTOR = 'executor'
+  ADMIN = 'Администратор',
+  MANAGER = 'Менеджер',
+  EXECUTOR = 'Исполнитель'
 }
