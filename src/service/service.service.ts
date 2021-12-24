@@ -4,6 +4,7 @@ import { UpdateServiceDto } from './dto/update-service.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Service } from './entities/service.entity';
 import { Repository } from 'typeorm';
+import { CategoryDto } from "./dto/category.dto";
 
 @Injectable()
 export class ServiceService {
@@ -22,6 +23,11 @@ export class ServiceService {
 
   findOne(id: number) {
     return this.serviceRepository.findOne(id)
+  }
+
+  async findByCategory(cat: CategoryDto){
+    const qb = this.serviceRepository.createQueryBuilder('service')
+    qb.select('service').where('service.category == :cat', {cat: cat})
   }
 
   update(id: number, updateServiceDto: UpdateServiceDto) {

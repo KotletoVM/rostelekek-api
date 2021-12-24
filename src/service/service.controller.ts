@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Query } from "@nestjs/common";
 import { ServiceService } from './service.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
@@ -20,10 +20,10 @@ export class ServiceController {
     isArray: true
   })
   @Get()
-  async findAll() {
-    const service = await this.serviceService.findAll()
-    if (service.length == 0) throw new NotFoundException('Услуги не найдены')
-    return service
+  async findAll(@Query('cat') cat?: string) {
+      const service = await this.serviceService.findAll()
+      if (service.length == 0) throw new NotFoundException('Услуги не найдены')
+      return service
   }
 
   @ApiOkResponse({
