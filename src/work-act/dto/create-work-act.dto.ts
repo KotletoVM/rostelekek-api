@@ -8,6 +8,7 @@ import {
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class CreateWorkActDto {
+  @ApiPropertyOptional()
   @IsEmpty()
   id: number;
   @ApiProperty()

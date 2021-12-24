@@ -6,7 +6,7 @@ export class Equipment {
   id: number
   @Column()
   name: string
-  @Column({type: "money"})
+  @Column({type: "float"})
   price: number
   @Column({nullable: true})
   notes: string

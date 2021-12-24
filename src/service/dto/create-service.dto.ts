@@ -3,13 +3,19 @@ import {
   IsNotEmpty,
   IsOptional,
   IsEmpty,
-  IsNumber
+  IsNumber, IsIn, IsEnum
 } from "class-validator";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { category } from "../../enums/category.enum";
 
 export class CreateServiceDto {
+  @ApiPropertyOptional()
   @IsEmpty()
   id: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(category)
+  category: string;
   @ApiProperty()
   @IsNotEmpty()
   @IsString()

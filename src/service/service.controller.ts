@@ -34,7 +34,7 @@ export class ServiceController {
   async findOne(@Param('id') id: number) {
     const service = await this.serviceService.findOne(+id);
     if (!service) throw new NotFoundException(`Сервис с номером ${id} не найден`)
-    return this.serviceService.findOne(+id);
+    return service
   }
 
   @Patch(':id')

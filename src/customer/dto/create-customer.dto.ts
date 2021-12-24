@@ -14,6 +14,7 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 
 export class CreateCustomerDto {
+  @ApiPropertyOptional()
   @IsEmpty()
   id: number;
   @ApiProperty()

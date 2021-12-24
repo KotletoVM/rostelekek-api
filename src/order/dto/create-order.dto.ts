@@ -3,9 +3,10 @@ import {
   IsEmpty,
   IsInt, IsDate, IsNumber,
 } from 'class-validator';
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class CreateOrderDto {
+  @ApiPropertyOptional()
   @IsEmpty()
   id: number;
   @ApiProperty()

@@ -8,6 +8,7 @@ import {
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class CreateWorkerDto {
+  @ApiPropertyOptional()
   @IsEmpty()
   id: number;
   @ApiProperty()
