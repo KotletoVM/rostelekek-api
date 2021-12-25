@@ -11,8 +11,9 @@ export class WorkActService {
     @InjectRepository(WorkAct)
     private workActRepository : Repository<WorkAct>
   ) {}
-  create(createWorkActDto: CreateWorkActDto) {
-    return this.workActRepository.create(createWorkActDto)
+
+  async create(createWorkActDto: CreateWorkActDto) {
+    return this.workActRepository.save(createWorkActDto)
   }
 
   findAll() {

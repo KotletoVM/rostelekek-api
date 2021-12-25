@@ -3,8 +3,8 @@ import {
   IsNotEmpty,
   IsOptional,
   IsEmpty,
-  IsNumber, IsDate, IsInt
-} from "class-validator";
+  IsNumber, IsDate, IsInt, IsDateString,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class CreateWorkActDto {
@@ -21,11 +21,11 @@ export class CreateWorkActDto {
   id_worker: number;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   start_date: Date;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   finish_date: Date;
   @ApiPropertyOptional()
   @IsOptional()

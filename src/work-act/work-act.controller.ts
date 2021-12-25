@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { WorkActService } from './work-act.service';
 import { CreateWorkActDto } from './dto/create-work-act.dto';
 import { UpdateWorkActDto } from './dto/update-work-act.dto';
@@ -23,6 +23,7 @@ export class WorkActController {
   async findAll() {
     const workAct = await this.workActService.findAll();
     if (workAct.length == 0) throw new NotFoundException('Чото не найдено ничо)')
+    return workAct
   }
 
   @ApiOkResponse({

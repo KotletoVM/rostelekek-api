@@ -34,6 +34,7 @@ export class OrderController {
   async findOne(@Param('id') id: number) {
     const order = await this.orderService.findOne(+id);
     if (!order) throw new NotFoundException(`Заказ с номером ${id} не найден`)
+    return order
   }
 
   @Patch(':id')

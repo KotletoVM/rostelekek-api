@@ -5,10 +5,10 @@ import { Worker } from '../../worker/entities/worker.entity'
 export class WorkAct {
   @PrimaryGeneratedColumn()
   id: number;
-  @ManyToOne(() => Order, order => order.id, {nullable: false})
+  @ManyToOne(() => Order, {nullable: false})
   @JoinColumn({name: "id_order"})
   id_order: number;
-  @ManyToOne(() => Worker, worker => worker.id, {nullable: false})
+  @ManyToOne(() => Worker,  {nullable: false})
   @JoinColumn({name: "id_worker"})
   id_worker: number;
   @Column({nullable: true, type: "timestamp"})
