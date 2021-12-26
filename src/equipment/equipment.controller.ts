@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseGuards } from '@nestjs/common';
 import { EquipmentService } from './equipment.service';
 import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { UpdateEquipmentDto } from './dto/update-equipment.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { JwtWorkerGuard } from '../auth/guards/jwt-worker.guard';
 
 @ApiTags('Equipment')
 @Controller('equipment')

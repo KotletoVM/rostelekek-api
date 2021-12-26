@@ -21,6 +21,10 @@ async function bootstrap() {
     .addTag('Order', 'операции, связанные с заказами')
     .addTag('Service', 'операции, связанные с услугами')
     .addTag('Equipment', 'операции, связанные с оборудованием')
+    .addBearerAuth({ type: 'http', description: 'Авторизация для аутентифицированных сотрудников', bearerFormat: 'JWT' }, 'jwt-worker')
+    .addBearerAuth({type: 'http', description: 'Авторизация для аутентифицированных пользователей', bearerFormat: 'JWT'}, 'jwt-customer')
+    .addBasicAuth({type: 'http', scheme: 'Basic', description: 'Аутентификация сотрудников по логину и паролю'}, 'local-worker')
+    .addBasicAuth({type: 'http', scheme: 'Basic', description: 'Аутентификация пользователей по емейлу и паролю'}, 'local-customer')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

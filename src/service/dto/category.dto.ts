@@ -4,6 +4,6 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class CategoryDto{
   @ApiPropertyOptional()
-  @IsEnum(category)
+  @IsEnum(category, {message: 'Указанная категория не найдена'})
   category: string = '3in1'
 }

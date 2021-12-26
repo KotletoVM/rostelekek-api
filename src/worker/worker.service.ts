@@ -4,6 +4,7 @@ import { UpdateWorkerDto } from './dto/update-worker.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Worker } from './entities/worker.entity';
+import { LoginWorkerDto } from './dto/login-worker.dto';
 
 @Injectable()
 export class WorkerService {
@@ -20,8 +21,13 @@ export class WorkerService {
     return qb.select(['worker.id', 'worker.name', 'worker.experience', 'worker.position']).getMany()
   }
 
-  findOne(id: number) {
-    return this.workerRepository.findOne(id)
+  async findOne(id: number) {
+    const {password,...worker} = await this.workerRepository.findOne(id)
+    return worker
+  }
+
+  findOneByCond(cond: LoginWorkerDto){
+    return this.workerRepository.findOne(cond)
   }
 
   update(id: number, updateWorkerDto: UpdateWorkerDto) {

@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Res, UseGuards } from '@nestjs/common';
 import { WorkerService } from './worker.service';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
-import { ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+import { JwtWorkerGuard } from '../auth/guards/jwt-worker.guard';
 
 @ApiTags('Worker')
 @Controller('worker')
@@ -20,6 +21,8 @@ export class WorkerController {
     type: CreateWorkerDto,
     isArray: true
   })
+  @ApiBearerAuth('jwt-worker')
+  @UseGuards(JwtWorkerGuard)
   @Get()
   async findAll() {
     const workers = await this.workerService.findAll();
