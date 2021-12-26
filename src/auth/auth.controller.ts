@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateCustomerDto } from '../customer/dto/create-customer.dto';
 import { CreateWorkerDto } from '../worker/dto/create-worker.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBasicAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LocalWorkerGuard } from './guards/local-worker.guard';
+import { LocalCustomerGuard } from './guards/local-customer.guard';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -16,7 +18,7 @@ export class AuthController {
   })
   @Post('register')
   create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.authService.create(createCustomerDto);
+    return this.authService.createCustomer(createCustomerDto);
   }
 
   @ApiOperation({description: "Это для регистрации работников)"})
@@ -29,23 +31,35 @@ export class AuthController {
     return this.authService.createWorker(createWorkerDto);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @ApiOkResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        "access-token": {},
+        "refresh-token": {}
+      }
+    }
+  })
+  @ApiBasicAuth('local-worker')
+  @UseGuards(LocalWorkerGuard)
+  @Post('login-worker')
+  loginWorker(@Request() req){
+    return this.authService.loginWorker(req.user)
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  /*@Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }*/
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @ApiOkResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        "access-token": {},
+        "refresh-token": {}
+      }
+    }
+  })
+  @ApiBasicAuth('local-customer')
+  @UseGuards(LocalCustomerGuard)
+  @Post('login')
+  loginCustomer(@Request() req){
+    return this.authService.loginCustomer(req.user)
   }
 }
