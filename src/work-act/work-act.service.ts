@@ -19,13 +19,13 @@ export class WorkActService {
   findAll() {
     const qb = this.workActRepository.createQueryBuilder("work-act")
     return qb
-      .select("work-act").getMany()
+      .select(["work-act, work-act.id_order, work-act.id_worker"]).getMany()
   }
 
   findOne(id: number) {
     const qb = this.workActRepository.createQueryBuilder("work-act")
     return qb
-      .select("work-act").where("work-act.id = :id", {id: id}).getOne()
+      .select(["work-act, work-act.id_order, work-act.id_worker"]).where("work-act.id = :id", {id: id}).getOne()
   }
 
   update(id: number, updateWorkActDto: UpdateWorkActDto) {
