@@ -18,18 +18,14 @@ export class WorkActService {
 
   findAll() {
     const qb = this.workActRepository.createQueryBuilder("work-act")
-    return qb.innerJoin("work-act.id_order", "order")
-      .innerJoin("work-act.id_worker", "worker")
-      .select(["work-act", "order.id_customer", "order.id_service", "order.date",
-        "worker.id" ,"worker.name"]).getMany()
+    return qb
+      .select("work-act").getMany()
   }
 
   findOne(id: number) {
     const qb = this.workActRepository.createQueryBuilder("work-act")
-    return qb.innerJoin("work-act.id_order", "order")
-      .innerJoin("work-act.id_worker", "worker")
-      .select(["work-act", "order.id_customer", "order.id_service", "order.date",
-        "worker.id" ,"worker.name"]).where("work-act.id = :id", {id: id}).getOne()
+    return qb
+      .select("work-act").where("work-act.id = :id", {id: id}).getOne()
   }
 
   update(id: number, updateWorkActDto: UpdateWorkActDto) {
