@@ -22,7 +22,7 @@ export class WorkerController {
     isArray: true
   })
   @ApiBearerAuth('jwt-worker')
-  @UseGuards(JwtWorkerGuard)
+  //@UseGuards(JwtWorkerGuard)
   @Get()
   async findAll() {
     const workers = await this.workerService.findAll();

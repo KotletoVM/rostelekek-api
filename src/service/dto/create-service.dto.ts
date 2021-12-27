@@ -10,10 +10,10 @@ import { category } from "../../enums/category.enum";
 
 export class CreateServiceDto {
   @ApiPropertyOptional()
-  @IsEmpty()
+  @IsEmpty({message: 'Id нельзя писать; '})
   id: number;
   @ApiProperty()
-  @IsNotEmpty()
+  @IsNotEmpty({message: 'Категорию необходимо заполнить; '})
   @IsEnum(category)
   category: string;
   @ApiProperty()

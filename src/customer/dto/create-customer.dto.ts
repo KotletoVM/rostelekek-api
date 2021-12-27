@@ -10,17 +10,22 @@ import {
   Length,
   IsInt,
 } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
 
 export class CreateCustomerDto {
-  @ApiPropertyOptional()
+  //@ApiPropertyOptional()
+  @ApiResponseProperty()
   @IsEmpty()
   id: number;
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   name: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  surname: string;
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
@@ -42,19 +47,9 @@ export class CreateCustomerDto {
   @IsOptional()
   @IsString()
   address: string;
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsInt()
+  @ApiResponseProperty()
+  @IsEmpty()
   personal_account: string;
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  @Length(3, 15, {message: "Длина логина должна быть не менее 3-х и не более 15-ти символов"})
-  login: string;
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsUrl()
-  userpic: string;
   @IsEmpty()
   isEmailConfirmed: boolean;
   @IsEmpty()

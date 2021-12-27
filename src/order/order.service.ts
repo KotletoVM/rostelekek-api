@@ -21,7 +21,8 @@ export class OrderService {
   }
 
   findOne(id: number) {
-    return this.orderRepository.findOne(id)
+    const qb = this.orderRepository.createQueryBuilder('order')
+    return qb.select(['order', 'customer', 'service', 'equipment']).where('order.id = :id', {id: id}).getOne()
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {
