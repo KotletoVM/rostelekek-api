@@ -5,10 +5,10 @@ import {
   IsEmpty,
   IsNumber, IsDate, IsInt, IsDateString,
 } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
 export class CreateWorkActDto {
-  @ApiPropertyOptional()
+  @ApiResponseProperty()
   @IsEmpty()
   id: number;
   @ApiProperty()

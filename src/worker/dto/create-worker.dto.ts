@@ -5,10 +5,10 @@ import {
   IsEmpty,
   Matches, MinLength
 } from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
 export class CreateWorkerDto {
-  @ApiPropertyOptional()
+  @ApiResponseProperty()
   @IsEmpty()
   id: number;
   @ApiProperty()

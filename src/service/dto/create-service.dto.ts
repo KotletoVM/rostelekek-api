@@ -5,11 +5,11 @@ import {
   IsEmpty,
   IsNumber, IsIn, IsEnum
 } from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 import { category } from "../../enums/category.enum";
 
 export class CreateServiceDto {
-  @ApiPropertyOptional()
+  @ApiResponseProperty()
   @IsEmpty({message: 'Id нельзя писать; '})
   id: number;
   @ApiProperty()

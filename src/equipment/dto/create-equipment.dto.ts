@@ -1,8 +1,8 @@
 import { IsEmpty, IsNumber, IsString } from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
 export class CreateEquipmentDto {
-  @ApiPropertyOptional()
+  @ApiResponseProperty()
   @IsEmpty()
   id: number
   @ApiProperty()

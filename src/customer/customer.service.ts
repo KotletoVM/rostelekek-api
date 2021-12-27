@@ -21,6 +21,11 @@ export class CustomerService {
     return qb.select(['customer.id', 'customer.name', 'customer.surname', 'customer.email']).getMany()
   }
 
+  findMe(user) {
+    const qb = this.customerRepository.createQueryBuilder('customer')
+    return qb.select('customer').where('customer.id = :id', {id: user.id}).getOne()
+  }
+
   findOne(id: number) {
     const qb = this.customerRepository.createQueryBuilder('customer')
     return qb.select(['customer.id', 'customer.name', 'customer.surname',

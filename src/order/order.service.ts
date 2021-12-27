@@ -17,12 +17,21 @@ export class OrderService {
   }
 
   findAll() {
-    return this.orderRepository.find()
+    const qb = this.orderRepository.createQueryBuilder('order')
+    return qb.innerJoin('order.id_customer', 'customer')
+      .innerJoin('order.id_service', 'service')
+      .innerJoin('order.id_equip', 'equipment')
+      .select(['order', 'service.id', 'service.name', 'service.price', 'customer.id',
+        'customer.name', 'customer.surname', 'customer.email', 'customer.phone', 'customer.address',
+        'customer.personal_account', 'equipment']).getMany()
   }
 
   findOne(id: number) {
     const qb = this.orderRepository.createQueryBuilder('order')
-    return qb.select(['order', 'customer', 'service', 'equipment']).where('order.id = :id', {id: id}).getOne()
+    return qb.innerJoin('order.id_customer', 'customer')
+      .innerJoin('order.id_service', 'service')
+      .innerJoin('order.id_equip', 'equipment')
+      .select(['order', 'customer', 'service', 'equipment']).where('order.id = :id', {id: id}).getOne()
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {

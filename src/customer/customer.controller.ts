@@ -1,8 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  NotFoundException,
+  Request,
+  UseGuards
+} from "@nestjs/common";
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { JwtCustomerStrategy } from "../auth/strategies/jwt-customer.strategy";
+import { JwtCustomerGuard } from "../auth/guards/jwt-customer.guard";
 
 @ApiTags('Customer')
 @Controller('customer')
@@ -21,6 +34,16 @@ export class CustomerController {
   @Get()
   findAll() {
     return this.customerService.findAll();
+  }
+
+  @ApiOkResponse({
+    description: "Запрос удался",
+    type: CreateCustomerDto
+  })
+  @UseGuards(JwtCustomerGuard)
+  @Get('me')
+  findMe(@Request() req) {
+    return this.customerService.findMe(req.user)
   }
 
   @ApiOkResponse({

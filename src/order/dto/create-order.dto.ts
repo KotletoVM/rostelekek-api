@@ -1,12 +1,12 @@
 import {
   IsNotEmpty,
   IsEmpty,
-  IsInt, IsDate, IsNumber,
-} from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+  IsInt, IsDate, IsNumber, IsDateString
+} from "class-validator";
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
 export class CreateOrderDto {
-  @ApiPropertyOptional()
+  @ApiResponseProperty()
   @IsEmpty()
   id: number;
   @ApiProperty()
@@ -15,7 +15,7 @@ export class CreateOrderDto {
   id_customer: number;
   @ApiProperty()
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   date: Date;
   @ApiProperty()
   @IsNotEmpty()
