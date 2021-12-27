@@ -19,13 +19,12 @@ export class OrderService {
   findAll() {
     const qb = this.orderRepository.createQueryBuilder('order')
     return qb
-      .select(['order', 'order.id_customer', 'order.id_service', 'order.id_equip']).getMany()
+      .select(['order']).getMany()
   }
 
   findOne(id: number) {
     const qb = this.orderRepository.createQueryBuilder('order')
-    return qb
-      .select(['order', 'order.id_customer', 'order.id_service', 'order.id_equip']).where('order.id = :id', {id: id}).getOne()
+    return qb.select(['order', 'service.id']).innerJoin('order.id_service', 'service').where('order.id = :id', {id: id}).getOne()
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {
