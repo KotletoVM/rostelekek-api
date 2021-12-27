@@ -25,7 +25,7 @@ export class WorkActService {
   findOne(id: number) {
     const qb = this.workActRepository.createQueryBuilder("work-act")
     return qb
-      .select(["work-act, work-act.id_order, work-act.id_worker"]).where("work-act.id = :id", {id: id}).getOne()
+      .select(["work-act", "work-act.id_order", "work-act.id_worker"]).where("work-act.id = :id", {id: id}).getOne()
   }
 
   update(id: number, updateWorkActDto: UpdateWorkActDto) {

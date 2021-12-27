@@ -15,14 +15,17 @@ export class Order {
   id: number;
   @ManyToOne(() => Customer, customer => customer.id, {nullable: false})
   @JoinColumn({name: "id_customer"})
+  @Column()
   id_customer: number;
   @Column({type: 'timestamp'})
   date: Date;
   @ManyToOne(() => Service, service => service.id, {nullable: false})
   @JoinColumn({name: "id_service"})
+  @Column()
   id_service: number;
   @ManyToOne(() => Equipment, equip => equip.id, {nullable: false})
   @JoinColumn({name: "id_equip"})
+  @Column()
   id_equip: number;
   @Column({type: "float"})
   end_price: number;
