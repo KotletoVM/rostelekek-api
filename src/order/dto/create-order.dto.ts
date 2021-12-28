@@ -12,9 +12,8 @@ export class CreateOrderDto {
   @ApiResponseProperty()
   @IsEmpty({message: 'Id пользователя должен быть пустым; '})
   id_customer: number;
-  @ApiProperty()
-  @IsNotEmpty({message: 'Дата заявки не должна быть пустой; '})
-  @IsDateString({}, {message: 'Дата заявки должна быть датой в формате XXXX-XX-XX (y-m-d); '})
+  @ApiResponseProperty()
+  @IsEmpty({message: 'Дата создания пользователя устанавливается автоматически; '})
   date: Date;
   @ApiProperty()
   @IsNotEmpty({message: 'Id услуги должен быть указан; '})

@@ -60,10 +60,13 @@ export class CreateCustomerDto {
   @ApiResponseProperty()
   @IsEmpty({message: 'Лицевой счет должен быть пустым; '})
   personal_account: string;
+  @ApiResponseProperty()
   @IsEmpty({message: 'Поле для проверки подтверждения email устанавливается автоматически; '})
   isEmailConfirmed: boolean;
+  @ApiResponseProperty()
   @IsEmpty({message: 'Дата создания пользователя устанавливается автоматически; '})
   createdAt: Date
+  @ApiResponseProperty()
   @IsEmpty({message: 'Дата обновления пользователя устанавливается автоматически; '})
   updatedAt: Date
 }

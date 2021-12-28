@@ -3,8 +3,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  JoinColumn
-} from "typeorm";
+  JoinColumn, CreateDateColumn,
+} from 'typeorm';
 import { Customer } from "../../customer/entities/customer.entity";
 import { Service } from "../../service/entities/service.entity";
 import { Equipment } from '../../equipment/entities/equipment.entity';
@@ -17,7 +17,7 @@ export class Order {
   @JoinColumn({name: "id_customer"})
   @Column()
   id_customer: number;
-  @Column({type: 'timestamp'})
+  @CreateDateColumn({type: 'timestamp'})
   date: Date;
   @ManyToOne(() => Service, service => service.id, {nullable: false})
   @JoinColumn({name: "id_service"})

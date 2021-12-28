@@ -26,8 +26,10 @@ export class OrderService {
       id_customer: id,
       id_equip: createOrderDto.id_equip,
       id_service: createOrderDto.id_service,
-      date: createOrderDto.date,
-      end_price: createOrderDto.end_price
+      end_price: createOrderDto.end_price,
+      street: createOrderDto.street,
+      home: createOrderDto.home,
+      flat: createOrderDto.flat
     })
     this.emailService.sendOrderMail(customer, service)
     return order
