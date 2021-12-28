@@ -1,7 +1,7 @@
 import {
   IsNotEmpty,
   IsEmpty,
-  IsInt, IsDate, IsNumber, IsDateString, IsString, MaxLength,
+  IsInt, IsDate, IsNumber, IsDateString, IsString, MaxLength, IsOptional,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
@@ -20,8 +20,8 @@ export class CreateOrderDto {
   @IsNotEmpty({message: 'Id услуги должен быть указан; '})
   @IsInt({message: 'Id услуги должен быть целым числом; '})
   id_service: number;
-  @ApiProperty()
-  @IsNotEmpty({message: 'Id оборудования должен быть указан; '})
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsInt({message: 'Id оборудования должен быть целым числом; '})
   id_equip: number;
   @ApiProperty()

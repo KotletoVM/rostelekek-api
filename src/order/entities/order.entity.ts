@@ -23,7 +23,7 @@ export class Order {
   @JoinColumn({name: "id_service"})
   @Column()
   id_service: number;
-  @ManyToOne(() => Equipment, equip => equip.id, {nullable: false})
+  @ManyToOne(() => Equipment, equip => equip.id, {nullable: true})
   @JoinColumn({name: "id_equip"})
   @Column()
   id_equip: number;
