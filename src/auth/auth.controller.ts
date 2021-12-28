@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards }
 import { AuthService } from './auth.service';
 import { CreateCustomerDto } from '../customer/dto/create-customer.dto';
 import { CreateWorkerDto } from '../worker/dto/create-worker.dto';
-import { ApiBasicAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBasicAuth, ApiBody, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LocalWorkerGuard } from './guards/local-worker.guard';
 import { LocalCustomerGuard } from './guards/local-customer.guard';
 
@@ -55,6 +55,15 @@ export class AuthController {
       properties: {
         "accessToken": {},
         "refreshToken": {}
+      }
+    }
+  })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        login: {},
+        password: {}
       }
     }
   })

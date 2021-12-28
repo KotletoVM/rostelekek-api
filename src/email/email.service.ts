@@ -29,6 +29,8 @@ export class EmailService {
     const text = `${customer.name}, ваша заявка на подключение услуги "${service.name}" была передана сотрудникам.`;
     const internet = service.internet?`<h5>Интернет: ${service.internet}</h5>`:``
     const mobile = service.mobile?`<h5>Мобильная связь: ${service.mobile}</h5>`:``
+    const video = service.video?`<h5>Видеонаблюдение: ${service.video}</h5>`:``
+    const films = service.films?`<h5>Фильмы и сериалы: ${service.films}</h5>`:``
     const tv = service.tv?`<h5>Телевидение: ${service.tv}</h5>`:``
     let category
     switch (service.category) {
@@ -61,10 +63,12 @@ export class EmailService {
         internet +
         mobile +
         tv +
+        films +
+        video +
         `</td>` +
         `</tr>` +
         `<tr style='background-color: #DDDDDD'>` +
-        `<td><h4>Цена: ${service.price}</h4></td>` +
+        `<td><h4>Цена: ${service.price} руб.</h4></td>` +
         `</tr>` +
         `</tbody>` +
       `</table>`
@@ -76,5 +80,4 @@ export class EmailService {
       html
     })
   }
-
 }
