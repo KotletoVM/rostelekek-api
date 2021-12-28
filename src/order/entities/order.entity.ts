@@ -25,7 +25,7 @@ export class Order {
   id_service: number;
   @ManyToOne(() => Equipment, equip => equip.id, {nullable: true})
   @JoinColumn({name: "id_equip"})
-  @Column()
+  @Column({nullable: true})
   id_equip: number;
   @Column({type: "float"})
   end_price: number;
