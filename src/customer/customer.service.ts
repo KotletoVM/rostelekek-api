@@ -5,6 +5,7 @@ import { Customer } from './entities/customer.entity';
 import { Repository } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { LoginCustomerDto } from './dto/login-customer.dto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class CustomerService {
@@ -21,9 +22,10 @@ export class CustomerService {
     return qb.select(['customer.id', 'customer.name', 'customer.surname', 'customer.email']).getMany()
   }
 
-  findMe(user) {
+  async getProfile(user) {
     const qb = this.customerRepository.createQueryBuilder('customer')
-    return qb.select('customer').where('customer.id = :id', {id: user.id}).getOne()
+    const {password,...customer} = await qb.select('customer').where('customer.id = :id', {id: user.id}).getOne()
+    return customer
   }
 
   findOne(id: number) {

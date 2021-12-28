@@ -3,35 +3,36 @@ import {
   IsNotEmpty,
   IsOptional,
   IsEmpty,
-  Matches, MinLength
-} from "class-validator";
+  Matches, MinLength, IsEnum,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
+import { position } from '../../enums/position.enum';
 
 export class CreateWorkerDto {
   @ApiResponseProperty()
-  @IsEmpty()
+  @IsEmpty({message: 'Id должен быть пустым; '})
   id: number;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Необходимо заполнить логин; '})
+  @IsString({message: 'Логин должен быть строкой; '})
   login: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(6, {message: "Пароль должен быть не менее 6 символов"})
+  @IsNotEmpty({message: 'Необходимо заполнить пароль; '})
+  @IsString({message: 'Пароль должен быть строкой; '})
+  @MinLength(6, {message: "Пароль должен быть не менее 6 символов; "})
   @Matches(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/,
-    { message: 'Пароль должен содержать буквы и цифры\n' })
+    { message: 'Пароль должен содержать буквы и цифры; ' })
   password: string;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
+  @IsString({message: 'Опыт должен быть строкой; '})
   experience: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Необходимо заполнить имя; '})
+  @IsString({message: 'Имя должно быть строкой; '})
   name: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Позиция сотрудника должна быть заполнена; '})
+  @IsEnum(position, {message: 'Позиция сотрудника должна быть выбрана из: Администратор, Диспетчер, Исполнитель; '})
   position: string;
 }

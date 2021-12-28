@@ -10,30 +10,30 @@ import { category } from "../../enums/category.enum";
 
 export class CreateServiceDto {
   @ApiResponseProperty()
-  @IsEmpty({message: 'Id нельзя писать; '})
+  @IsEmpty({message: 'Id должен быть пустым; '})
   id: number;
   @ApiProperty()
   @IsNotEmpty({message: 'Категорию необходимо заполнить; '})
-  @IsEnum(category)
+  @IsEnum(category, {message: 'Категория должна быть выбрана из следующих вариантов: 2 в 1, 3 в 1, 4 в 1, Домашний Интернет, Видеонаблюдение; '})
   category: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Название необходимо заполнить; '})
+  @IsString({message: 'Название должно быть строкой; '})
   name: string;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
+  @IsString({message: 'Интернет должен быть строкой; '})
   internet: string;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
+  @IsString({message: 'Телевидение должно быть строкой; '})
   tv: string;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
+  @IsString({message: 'Мобильная связь должна быть строкой; '})
   mobile: string;
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumber({}, {message: 'Цена должна быть числом; '})
   price: number;
 }

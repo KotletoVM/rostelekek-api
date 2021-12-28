@@ -16,6 +16,15 @@ export class AuthController {
     status: 201,
     description: 'Пользователь добавлен'
   })
+  @ApiOkResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        "accessToken": {},
+        "refreshToken": {}
+      }
+    }
+  })
   @Post('register')
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.authService.createCustomer(createCustomerDto);
@@ -26,6 +35,15 @@ export class AuthController {
     status: 201,
     description: 'Работник добавлен'
   })
+  @ApiOkResponse({
+    schema: {
+      type: 'object',
+      properties: {
+        "accessToken": {},
+        "refreshToken": {}
+      }
+    }
+  })
   @Post('register-worker')
   createWorker(@Body() createWorkerDto: CreateWorkerDto) {
     return this.authService.createWorker(createWorkerDto);
@@ -35,8 +53,8 @@ export class AuthController {
     schema: {
       type: 'object',
       properties: {
-        "access-token": {},
-        "refresh-token": {}
+        "accessToken": {},
+        "refreshToken": {}
       }
     }
   })
@@ -51,8 +69,8 @@ export class AuthController {
     schema: {
       type: 'object',
       properties: {
-        "access-token": {},
-        "refresh-token": {}
+        "accessToken": {},
+        "refreshToken": {}
       }
     }
   })

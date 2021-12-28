@@ -42,8 +42,8 @@ export class CustomerController {
   })
   @UseGuards(JwtCustomerGuard)
   @Get('me')
-  findMe(@Request() req) {
-    return this.customerService.findMe(req.user)
+  getProfile(@Request() req) {
+    return this.customerService.getProfile(req.user)
   }
 
   @ApiOkResponse({

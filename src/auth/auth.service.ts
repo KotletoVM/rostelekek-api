@@ -18,13 +18,33 @@ export class AuthService {
   async createCustomer(createCustomerDto: CreateCustomerDto) {
     createCustomerDto.password = await this.generateHash(createCustomerDto.password)
     const {password, ...customer} = await this.customerService.create(createCustomerDto)
-    return customer
+    const payload = {email: customer.email, sub: customer.id}
+    const accessToken = this.generateJwtAccessToken(payload);
+    const refreshToken = this.generateJwtRefreshToken(payload);
+    return {accessToken: accessToken, refreshToken: refreshToken}
   }
 
   async createWorker(createWorkerDto: CreateWorkerDto){
     createWorkerDto.password = await this.generateHash(createWorkerDto.password)
     const {password, ...worker} = await this.workerService.create(createWorkerDto)
-    return worker
+    const payload = {login: worker.login, sub: worker.id}
+    const accessToken = this.generateJwtAccessToken(payload);
+    const refreshToken = this.generateJwtRefreshToken(payload);
+    return {accessToken: accessToken, refreshToken: refreshToken}
+  }
+
+  async loginWorker(worker){
+    const payload = {login: worker.login, sub: worker.id}
+    const accessToken = this.generateJwtAccessToken(payload);
+    const refreshToken = this.generateJwtRefreshToken(payload);
+    return {accessToken: accessToken, refreshToken: refreshToken}
+  }
+
+  async loginCustomer(customer){
+    const payload = {email: customer.email, sub: customer.id}
+    const accessToken = this.generateJwtAccessToken(payload);
+    const refreshToken = this.generateJwtRefreshToken(payload);
+    return {accessToken: accessToken, refreshToken: refreshToken}
   }
 
   generateHash(password: string){
@@ -53,20 +73,6 @@ export class AuthService {
       else return null
     }
     else throw new NotFoundException('Пользователь не найден')
-  }
-
-  async loginWorker(worker){
-    const payload = {login: worker.login, sub: worker.id}
-    const accessToken = this.generateJwtAccessToken(payload);
-    const refreshToken = this.generateJwtRefreshToken(payload);
-    return {accessToken: accessToken, refreshToken: refreshToken}
-  }
-
-  async loginCustomer(customer){
-    const payload = {email: customer.email, sub: customer.id}
-    const accessToken = this.generateJwtAccessToken(payload);
-    const refreshToken = this.generateJwtRefreshToken(payload);
-    return {accessToken: accessToken, refreshToken: refreshToken}
   }
 
   generateJwtAccessToken(payload){

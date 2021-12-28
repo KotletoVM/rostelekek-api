@@ -16,45 +16,45 @@ import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/s
 export class CreateCustomerDto {
   //@ApiPropertyOptional()
   @ApiResponseProperty()
-  @IsEmpty()
+  @IsEmpty({message: 'Id должен быть пустым; '})
   id: number;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Необходимо заполнить имя; '})
+  @IsString({message: 'Имя должно быть строкой; '})
   name: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Необходимо заполнить фамилию; '})
+  @IsString({message: 'Фамилия должна быть строкой; '})
   surname: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsEmail()
+  @IsNotEmpty({message: 'Необходимо заполнить email; '})
+  @IsEmail({message: 'Email должен быть указан корректно; '})
   email: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(6, {message: "Пароль должен быть не менее 6 символов"})
+  @IsNotEmpty({message: 'Необходимо заполнить пароль; '})
+  @IsString({message: 'Пароль должен быть строкой; '})
+  @MinLength(6, {message: "Пароль должен быть не менее 6 символов; "})
   @Matches(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/,
-    { message: 'Пароль должен содержать буквы и цифры\n' })
+    { message: 'Пароль должен содержать буквы и цифры; ' })
   password: string;
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({message: 'Необходимо заполнить телефон; '})
+  @IsString({message: 'Телефон должен быть строкой; '})
   @Matches(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/,
-    {message: 'Телефон должен быть введен в правильном формате\n' })
+    {message: 'Телефон должен быть введен в правильном формате; ' })
   phone: string;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString()
+  @IsString({message: 'Адрес должен быть строкой; '})
   address: string;
   @ApiResponseProperty()
-  @IsEmpty()
+  @IsEmpty({message: 'Лицевой счет должен быть пустым; '})
   personal_account: string;
-  @IsEmpty()
+  @IsEmpty({message: 'Поле для проверки подтверждения email устанавливается автоматически; '})
   isEmailConfirmed: boolean;
-  @IsEmpty()
+  @IsEmpty({message: 'Дата создания пользователя устанавливается автоматически; '})
   createdAt: Date
-  @IsEmpty()
+  @IsEmpty({message: 'Дата обновления пользователя устанавливается автоматически; '})
   updatedAt: Date
 }
 
