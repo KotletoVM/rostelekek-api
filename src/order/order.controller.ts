@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, U
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { JwtCustomerGuard } from '../auth/guards/jwt-customer.guard';
 
 @ApiTags('Order')
@@ -10,6 +10,7 @@ import { JwtCustomerGuard } from '../auth/guards/jwt-customer.guard';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
+  @ApiBearerAuth('jwt-customer')
   @UseGuards(JwtCustomerGuard)
   @Post()
   create(@Body() createOrderDto: CreateOrderDto, @Request() req) {

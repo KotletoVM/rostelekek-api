@@ -58,7 +58,9 @@ export class EmailService {
         `</tr>` +
         `<tr style='background-color: #DDDDDD'>` +
         `<td><h5>Услуга "${service.name}" в категории "${category}"</h5>` +
-        internet + mobile + tv +
+        internet +
+        mobile +
+        tv +
         `</td>` +
         `</tr>` +
         `<tr style='background-color: #DDDDDD'>` +
