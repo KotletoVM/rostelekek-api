@@ -30,8 +30,16 @@ export class CreateServiceDto {
   tv: string;
   @ApiPropertyOptional()
   @IsOptional()
+  @IsString({message: 'Онлайн-кинотеатр должен быть строкой; '})
+  films: string;
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsString({message: 'Мобильная связь должна быть строкой; '})
   mobile: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString({message: 'Видеонаблюдение должно быть строкой; '})
+  video: string;
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber({}, {message: 'Цена должна быть числом; '})

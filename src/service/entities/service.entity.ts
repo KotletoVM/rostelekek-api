@@ -17,7 +17,11 @@ export class Service {
   @Column({nullable: true})
   tv: string;
   @Column({nullable: true})
+  films: string;
+  @Column({nullable: true})
   mobile: string;
+  @Column({nullable: true})
+  video: string;
   @Column({type: "float"})
   price: number;
 }

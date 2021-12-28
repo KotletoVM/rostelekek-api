@@ -1,8 +1,8 @@
 import {
   IsNotEmpty,
   IsEmpty,
-  IsInt, IsDate, IsNumber, IsDateString
-} from "class-validator";
+  IsInt, IsDate, IsNumber, IsDateString, IsString, MaxLength,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
 
 export class CreateOrderDto {
@@ -28,4 +28,17 @@ export class CreateOrderDto {
   @IsNotEmpty({message: 'Цена заявки должна быть указана; '})
   @IsNumber({}, {message: 'Цена заявки должна быть числом; '})
   end_price: number;
+  @ApiProperty()
+  @IsNotEmpty({message: 'Улица должна быть указана; '})
+  @IsString({message: 'Улица должна быть строкой; '})
+  @MaxLength(64, {message: 'Максимальная длина названия улицы 64 символа; '})
+  street: string;
+  @ApiProperty()
+  @IsNotEmpty({message: 'Номер дома должен быть указан; '})
+  @IsNumber({}, {message: 'Номер дома должен быть целым числом; '})
+  home: number;
+  @ApiProperty()
+  @IsNotEmpty({message: 'Номер квартиры должен быть указан; '})
+  @IsNumber({}, {message: 'Номер квартиры должен быть целым числом; '})
+  flat: number;
 }

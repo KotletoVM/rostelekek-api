@@ -8,9 +8,10 @@ import {
   IsEmpty,
   MinLength,
   Length,
-  IsInt,
+  IsInt, MaxLength,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from "@nestjs/swagger";
+import { Column } from 'typeorm';
 
 
 export class CreateCustomerDto {
@@ -45,8 +46,17 @@ export class CreateCustomerDto {
   phone: string;
   @ApiPropertyOptional()
   @IsOptional()
-  @IsString({message: 'Адрес должен быть строкой; '})
-  address: string;
+  @IsString({message: 'Улица должен быть строкой; '})
+  @MaxLength(64)
+  street: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsInt()
+  home: number;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsInt()
+  flat: number;
   @ApiResponseProperty()
   @IsEmpty({message: 'Лицевой счет должен быть пустым; '})
   personal_account: string;

@@ -15,7 +15,11 @@ export class Customer {
   @Column({unique: true, nullable: true})
   phone: string;
   @Column({nullable: true})
-  address: string;
+  street: string;
+  @Column({nullable: true})
+  home: number;
+  @Column({nullable: true})
+  flat: number;
   @Column({unique: true, nullable: true})
   personal_account: string;
   @CreateDateColumn({type: 'timestamp'})

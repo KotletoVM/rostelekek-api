@@ -31,7 +31,7 @@ export class CustomerService {
   findOne(id: number) {
     const qb = this.customerRepository.createQueryBuilder('customer')
     return qb.select(['customer.id', 'customer.name', 'customer.surname',
-      'customer.email', 'customer.phone', 'customer.address', 'customer.personal_account'])
+      'customer.email', 'customer.phone', 'customer.street', 'customer.home', 'customer.flat', 'customer.personal_account'])
       .where(`customer.id = :customer_id`,
       {customer_id: id}).getOne()
   }

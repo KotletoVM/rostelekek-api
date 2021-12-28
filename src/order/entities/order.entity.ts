@@ -29,4 +29,10 @@ export class Order {
   id_equip: number;
   @Column({type: "float"})
   end_price: number;
+  @Column()
+  street: string;
+  @Column()
+  home: number;
+  @Column()
+  flat: number;
 }
