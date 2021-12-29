@@ -53,7 +53,7 @@ export class EmailService {
     const html = `<table style="vertical-align: middle; text-align: center; background-color: #CCCCCC; border: 0; margin: 0; font-family: Geneva, Arial, Helvetica, sans-serif;">` +
       `<tbody>` +
         `<tr>` +
-        `<td><h2>Спасибо, что выбираете Ростелекек.</h2></td>` +
+        `<td><h2>Спасибо, что выбираете Ростелеком.</h2></td>` +
         `</tr>` +
         `<tr>` +
         `<td><h3>${customer.name}, Ваша заявка на подключение услуги была передана сотрудникам.</h3></td>` +

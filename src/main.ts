@@ -11,13 +11,13 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   //const configService: ConfigService = app.get(ConfigService);
   const config = new DocumentBuilder()
-    .setTitle('RosteleKEK-API')
-    .setDescription('Ком или кек? конечно кек.')
+    .setTitle('Rostelekom-API')
+    .setDescription('Ком или кек?')
     .setVersion('1.0')
     .addTag('Auth', 'операции, связанные с аутентификацией')
     .addTag('Customer', 'операции, связанные с пользователями')
     .addTag('Worker', 'операции, связанные с сотрудниками')
-    .addTag('WorkAct', 'операции, связанные с чемттохз чем')
+    .addTag('WorkAct', 'операции, связанные с актами работы')
     .addTag('Order', 'операции, связанные с заказами')
     .addTag('Service', 'операции, связанные с услугами')
     .addTag('Equipment', 'операции, связанные с оборудованием')
