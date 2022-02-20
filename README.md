@@ -1,6 +1,3 @@
-<p align="center">
-  <a href="https://rostelekek.herokuapp.com/api" target="blank"><img src="https://www.meme-arsenal.com/memes/e981f11392c4ea64739620c0e27ff4f9.jpg" width="320" alt="Кщыеудулул Logo" /></a>
-</p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
